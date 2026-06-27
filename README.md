@@ -64,6 +64,18 @@ curl http://backend-svc:8081
 
 - [Манифест политики разрешающей доступ к поду cache только из пода backend](cache-allow-policy.yaml)
 
+- [Манифест политики разрешающей доступ к поду backend только из пода frontend](backend-allow-policy.yaml)
+
+- Запуск политик, подключение к подам и проверка доступности трафика:
+```
+k apply -f cache-allow-policy.yaml
+k apply -f backend-allow-policy.yaml
+
+k exec <имя_пода> -n app -c multitool -it -- bash -il
+
+curl http://backend-svc:8081
+```
+
 5. Продемонстрировать, что трафик разрешён и запрещён.
 
 - Попытка получить доступ к поду cache из frontend:
