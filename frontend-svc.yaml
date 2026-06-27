@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: app
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    nodePort: 30080
+  selector:
+    app: frontend
+  type: NodePort
